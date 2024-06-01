@@ -159,7 +159,7 @@ class ParserFactory:
 
 def identify_content_type(url):
     try:
-        response = requests.head(url)
+        response = requests.head(url, timeout=60)
         response.raise_for_status()  # Raise an exception for HTTP errors
     except requests.exceptions.RequestException as e:
         print(f"Error fetching the content: {e}")
