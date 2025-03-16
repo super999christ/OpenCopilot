@@ -69,7 +69,7 @@ def process_swagger_file(chatbot: Chatbot):
     try:
         if is_valid_url(swagger_url):
             # If the provided URL is valid, fetch the content using requests
-            response = requests.get(swagger_url)
+            response = requests.get(swagger_url, timeout=60)
             f_content = response.text
         else:
             # If it's not a URL, assume it's a local file path

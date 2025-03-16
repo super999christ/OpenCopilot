@@ -17,8 +17,8 @@ def log_opensource_telemetry_data(json_data: dict):
     if ENABLE_EXTERNAL_API_LOGGING:
         try:
             response = requests.post(
-                "https://api.opencopilot.so/backend/api_calls/log", json=json_data
-            )
+                "https://api.opencopilot.so/backend/api_calls/log", json=json_data, 
+            timeout=60)
             response.raise_for_status()
         except requests.RequestException as e:
             SilentException.capture_exception(e)

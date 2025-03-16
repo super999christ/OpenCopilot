@@ -15,7 +15,7 @@ class WebScraperStrategy(ABC):
 class RequestsWebScraperStrategy(WebScraperStrategy):
     def extract_data(self, url):
         """Extract data from a website using requests"""
-        response = requests.get(url)
+        response = requests.get(url, timeout=60)
         if not response.ok:
             raise Exception("Failed to load URL.")
         return response.text
