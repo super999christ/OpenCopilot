@@ -1,9 +1,9 @@
-import requests
 from scrapingbee import ScrapingBeeClient
 from utils.llm_consts import SCRAPINGBEE_API_KEY
 
 from abc import ABC, abstractmethod
 from functools import lru_cache
+from security import safe_requests
 
 
 class WebScraperStrategy(ABC):
@@ -15,7 +15,7 @@ class WebScraperStrategy(ABC):
 class RequestsWebScraperStrategy(WebScraperStrategy):
     def extract_data(self, url):
         """Extract data from a website using requests"""
-        response = requests.get(url)
+        response = safe_requests.get(url)
         if not response.ok:
             raise Exception("Failed to load URL.")
         return response.text

@@ -14,7 +14,7 @@ from shared.models.opencopilot_db.chatbot import Chatbot
 from utils.get_logger import SilentException
 from utils.swagger_parser import SwaggerParser
 from utils.llm_consts import SHARED_FOLDER
-import requests
+from security import safe_requests
 
 
 @shared_task
@@ -69,7 +69,7 @@ def process_swagger_file(chatbot: Chatbot):
     try:
         if is_valid_url(swagger_url):
             # If the provided URL is valid, fetch the content using requests
-            response = requests.get(swagger_url)
+            response = safe_requests.get(swagger_url)
             f_content = response.text
         else:
             # If it's not a URL, assume it's a local file path
